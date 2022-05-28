@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  watchtower:
+    container_name: shd-watchtower
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=${TZ}
+      - WATCHTOWER_CLEANUP=true # deleting old unused images automatically
+      # optional for notifications
+      #- WATCHTOWER_NOTIFICATIONS=email
+      #- WATCHTOWER_NOTIFICATION_EMAIL_FROM=${EMAIL_FROM}
+      #- WATCHTOWER_NOTIFICATION_EMAIL_TO=${WATCHTOWER_EMAIL_TO}
+      #- WATCHTOWER_NOTIFICATION_EMAIL_SERVER=${SMTP_SERVER}
+      #- WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=${SMTP_PORT}
+      #- WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=${SMTP_USER}
+      #- WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=${SMTP_PASSWORD}
+      # alternative for notification via pushover
+      #- WATCHTOWER_NOTIFICATIONS=shoutrrr
+      #- WATCHTOWER_NOTIFICATION_URL=pushover://shoutrrr:${PO_TOKEN}@${PO_USERKEY}
+  mosquitto:
+    container_name: shd-mosquitto
+    image: "eclipse-mosquitto:1.6"
+    restart: unless-stopped
+    volumes:
+      - "${DATADIR}/mosquitto/config:/mosquitto/config"
+      - "${DATADIR}/mosquitto/data:/mosquitto/data"
+      - "${DATADIR}/mosquitto/log:/mosquitto/log"
+    ports:
+      - 1883:1883
+
+
