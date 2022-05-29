@@ -1,11 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 PWD=$(pwd)
+
 source ./scripts/bootstrap.sh "$PWD"
 
 echo "⚙️  Setting up config"
-
-echo $DATADIR
 
 if [[ ! -d "$DATADIR/mosquitto" ]]; then
   echo "Mosquitto config"
