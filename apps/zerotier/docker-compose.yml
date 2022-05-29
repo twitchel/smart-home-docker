@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  zerotier:
+  shd-zerotier:
     container_name: shd-zerotier
     restart: unless-stopped
     image: zyclonite/zerotier

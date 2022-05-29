@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  homeassistant:
+  shd-homeassistant:
     container_name: shd-homeassistant
     restart: unless-stopped
     image: homeassistant/home-assistant:2022.5

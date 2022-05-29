@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  watchtower:
+  shd-watchtower:
     container_name: shd-watchtower
     image: containrrr/watchtower
     volumes:
@@ -20,7 +20,7 @@ services:
       # alternative for notification via pushover
       #- WATCHTOWER_NOTIFICATIONS=shoutrrr
       #- WATCHTOWER_NOTIFICATION_URL=pushover://shoutrrr:${PO_TOKEN}@${PO_USERKEY}
-  mosquitto:
+  shd-mosquitto:
     container_name: shd-mosquitto
     image: "eclipse-mosquitto:1.6"
     restart: unless-stopped
