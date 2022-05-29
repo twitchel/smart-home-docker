@@ -3,23 +3,26 @@
 PWD=$(pwd)
 source ./scripts/bootstrap.sh "$PWD"
 
-if [ -f "$DATADIR/.initcomplete" ]; then
-  echo "Init has already been run and config populated."
-  echo "If you wish to run again, remove the below file:"
-  echo "$DATADIR/.initcomplete"
-  echo "⚠️  WARNING: This will destroy your existing application data! ⚠️"
-  exit 1
+echo "⚙️  Setting up config"
+
+echo $DATADIR
+
+if [[ ! -d "$DATADIR/mosquitto" ]]; then
+  echo "Mosquitto config"
+  mkdir -p "$DATADIR/mosquitto"
+  cp -r "$PWD/apps/mosquitto/config" "$DATADIR/mosquitto"
 fi
 
-rm -rf "${DATADIR:?}/*"
+if [[ ! -d "$DATADIR/zerotier" && $ZEROTIER_ENABLED == 'true' ]]; then
+  echo "Zerotier config"
+  mkdir -p "$DATADIR/zerotier"
+  if [ ! -z "$ZEROTIER_NETWORK" ]; then
+    mkdir -p "$DATADIR/zerotier/networks.d"
+    touch "$DATADIR/zerotier/networks.d/$ZEROTIER_NETWORK.conf"
+  fi
+fi
 
-echo "Setting up config"
-mkdir -p "$DATADIR/mosquitto"
-cp -r "$PWD/apps/mosquitto/config" "$DATADIR/mosquitto"
-
-mkdir -p "$DATADIR/homeassistant"
-
-echo "Booting stack"
-sh ./scripts/start.sh "$PWD"
-
-touch "$DATADIR/.initcomplete"
+if [[ ! -d "$DATADIR/homeassistant" ]]; then
+  echo "Home Assistant config"
+  mkdir -p "$DATADIR/homeassistant"
+fi

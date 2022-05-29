@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  zerotier:
+    container_name: shd-zerotier
+    restart: unless-stopped
+    image: zyclonite/zerotier
+    volumes:
+      - ${DATADIR}/zerotier/config:/var/lib/zerotier-one
+      - /etc/localtime:/etc/localtime:ro
+    devices:
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    privileged: true
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
