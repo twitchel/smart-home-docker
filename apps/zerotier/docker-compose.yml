@@ -8,6 +8,7 @@ services:
     volumes:
       - ${DATADIR}/zerotier/config:/var/lib/zerotier-one
       - /etc/localtime:/etc/localtime:ro
+    network_mode: "host"
     devices:
       - /dev/net/tun
     cap_add:
