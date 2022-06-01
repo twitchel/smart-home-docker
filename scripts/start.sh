@@ -22,6 +22,10 @@ if [ "$HOME_ASSISTANT_ENABLED" == "true" ]; then
   fi
 fi
 
+if [ "$EUFY_SECURITY_ENABLED" == "true" ]; then
+    dockerFiles+=(-f "$PWD/apps/eufy-security/docker-compose.yml")
+fi
+
 if [ "$ZEROTIER_ENABLED" == "true" ]; then
   if [ -d "$DATADIR/zerotier" ]; then
     dockerFiles+=(-f "$PWD/apps/zerotier/docker-compose.yml")
