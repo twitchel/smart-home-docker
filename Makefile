@@ -12,4 +12,4 @@ start: ## Run Smart Home Containers
 	@bash ./scripts/start.sh
 
 stop: ## Stop all containers
-	@docker-compose --env-file .env -f ./common.docker-compose.yml -f ./apps/homeassistant/docker-compose.yml down
+	@docker-compose --env-file .env -f ./common.docker-compose.yml -f ./apps/homeassistant/docker-compose.yml -f ./apps/zerotier/docker-compose.yml down
