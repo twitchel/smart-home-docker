@@ -12,6 +12,14 @@ if [ "$HOME_ASSISTANT_ENABLED" == "true" ]; then
   else
     echo "Home assistant config not set. Please run init again."
   fi
+
+  if [ "$HOME_ASSISTANT_ZIGBEE_ENABLED" == "true" ]; then
+    dockerFiles+=(-f "$PWD/apps/homeassistant/zigbee.docker-compose.yml")
+  fi
+
+  if [ "$HOME_ASSISTANT_ZWAVE_ENABLED" == "true" ]; then
+    dockerFiles+=(-f "$PWD/apps/homeassistant/zwave.docker-compose.yml")
+  fi
 fi
 
 if [ "$ZEROTIER_ENABLED" == "true" ]; then
