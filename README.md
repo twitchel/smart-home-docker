@@ -7,6 +7,17 @@ This is a simple setup you can run on and linux based server to make your home s
 - Docker compose
 - Make
 
+## Services included
+
+### Apps
+- Home assistant - Home automation shenannigans!
+- ZWaveJS2MQTT - Z-wave device support for Home Assistant
+- Zerotier client - Great free VPN service. Self hosted version coming soon to this stack
+
+### Supporting Services
+- Mosquitto - MQTT service
+- Watchtower - Container updater
+
 ## Setup
 
 1. Clone this repo to your local machine
