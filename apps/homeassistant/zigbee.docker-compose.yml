@@ -12,7 +12,7 @@ services:
       - ${DATADIR}/zigbee2mqtt/data:/app/data
       - /run/udev:/run/udev:ro
     devices:
-      - /dev/ttyACM0:/dev/zigbee
+      - ${ZIGBEE2MQTT_DEVICE_PATH}:/dev/zigbee
     environment:
       - TZ=${TZ}
 
