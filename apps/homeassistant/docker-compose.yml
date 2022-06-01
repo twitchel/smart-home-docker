@@ -9,11 +9,32 @@ services:
       - ${DATADIR}/homeassistant/config:/config
       - /etc/localtime:/etc/localtime:ro
       - /dev/serial/by-id/:/dev/serial/by-id/
-#    network_mode: host
+    network_mode: host
     privileged: true
-    ports:
-      - 8123:8123
     environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    depends_on:
+      shd-mosquitto:
+        condition: service_started
+      shd-zwavejs2mqtt:
+        condition: service_started
+  shd-zwavejs2mqtt:
+    container_name: shd_zwavejs2mqtt
+    restart: unless-stopped
+    image: zwavejs/zwavejs2mqtt:latest
+    volumes:
+      - ${DATADIR}/zwavejs2mqtt:/usr/src/app/store
+    ports:
+      - '8091:8091'
+      - '3000:3000'
+      - '3001:3001'
+    devices:
+      - ${ZWAVEJS2MQTT_DEVICE_PATH}:/dev/zwave
+    environment:
+      - SESSION_SECRET=${ZWAVEJS2MQTT_SESSION_SECRET}
+      - ZWAVEJS_EXTERNAL_CONFIG=/usr/src/app/store/.config-db
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
