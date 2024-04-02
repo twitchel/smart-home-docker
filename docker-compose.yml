@@ -1,0 +1,31 @@
+version: "3.9"
+
+########################### DJ'S ENVIRONMENT
+# Here are my 5 Docker Hosts:
+# - App Server (appserver) - Ubuntu Server 22.04 LTS
+# - NAS (nas) - Unraid 6.x
+
+########################### THIS COMPOSE FILE
+# This bootstrap file relies on the $DOCKER_HOSTNAME environment variable
+# to determine which docker hosts file and services to load.
+
+########################### NETWORKS
+# You may customize the network subnets (192.168.x.0/24) below as you please.
+networks:
+  default:
+    driver: bridge
+  socket_proxy:
+    name: socket_proxy
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.91.0/24
+  t2_proxy:
+    name: t2_proxy
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.90.0/24
+
+include:
+  - compose/$DOCKER_HOSTNAME.docker-compose.yml

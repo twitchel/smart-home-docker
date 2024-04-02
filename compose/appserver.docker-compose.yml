@@ -1,0 +1,6 @@
+version: "3.9"
+
+########################### SECRETS
+secrets:
+  cf_dns_api_token:
+    file: $SECRETSDIR/cf_dns_api_token
