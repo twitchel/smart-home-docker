@@ -1,0 +1,14 @@
+{
+  "settings": [
+    {
+      "provider": "cloudflare",
+      "zone_identifier": "some id",
+      "domain": "domain.com",
+      "host": "@",
+      "ttl": 600,
+      "token": "yourtoken",
+      "ip_version": "ipv4",
+      "ipv6_suffix": ""
+    }
+  ]
+}

@@ -4,3 +4,6 @@ version: "3.9"
 secrets:
   cf_dns_api_token:
     file: $SECRETSDIR/cf_dns_api_token
+
+include:
+  - appserver/cloudflare-ddns.yml
