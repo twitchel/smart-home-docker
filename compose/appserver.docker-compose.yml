@@ -6,4 +6,7 @@ secrets:
     file: $SECRETSDIR/cf_dns_api_token
 
 include:
+  - appserver/traefik.yml
+#  - appserver/socket-proxy.yml
   - appserver/cloudflare-ddns.yml
+  - appserver/firefox.yml
