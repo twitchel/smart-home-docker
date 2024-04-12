@@ -1,2 +1,11 @@
+# Configs shouldnt ever be stored in a repo
 .env
+secrets/
+
+# IDE/editor configs
 .idea
+
+# Nah mate, dont store your appdata or logs either!
+appdata/
+logs/
+
