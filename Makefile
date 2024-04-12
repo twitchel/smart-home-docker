@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 .DEFAULT_GOAL := help
-.PHONY: help
+.PHONY: help init start stop appserver.start appserver.stop
 help:
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
@@ -13,3 +13,9 @@ start: ## Run Smart Home Containers
 
 stop: ## Stop all containers
 	@bash ./scripts/stop.sh
+
+appserver.start: ## Run Appserver Smart Home Containers
+	@SHD_HOST=appserver bash ./scripts/start.sh
+
+appserver.stop: ## Stop all Appserver containers
+	@SHD_HOST=appserver bash ./scripts/stop.sh

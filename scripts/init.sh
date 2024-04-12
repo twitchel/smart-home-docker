@@ -4,24 +4,26 @@ PWD=$(pwd)
 
 source ./scripts/bootstrap.sh "$PWD"
 
-echo "⚙️  Setting up config"
+function doInit() {
+    echo "⚙️  Setting up config for host $SHD_HOST"
 
-if [[ ! -d "$DATADIR/mosquitto" ]]; then
-  echo "Mosquitto config"
-  mkdir -p "$DATADIR/mosquitto"
-  cp -r "$PWD/apps/mosquitto/config" "$DATADIR/mosquitto"
+}
+
+if [ -z "$SHD_HOST" ]; then
+    read -r -p "🖥️  SHD_HOST environment variable not defined. Enter the host you want to initialize: " hostname
+    echo
+    export SHD_HOST=$hostname
+
+    if [ -z "$SHD_HOST" ]; then
+      echo "❌  Host cannot be empty. Init cancelled"
+      exit
+    fi
 fi
 
-if [[ ! -d "$DATADIR/zerotier" && $ZEROTIER_ENABLED == 'true' ]]; then
-  echo "Zerotier config"
-  mkdir -p "$DATADIR/zerotier"
-  if [ ! -z "$ZEROTIER_NETWORK" ]; then
-    mkdir -p "$DATADIR/zerotier/networks.d"
-    touch "$DATADIR/zerotier/networks.d/$ZEROTIER_NETWORK.conf"
-  fi
-fi
-
-if [[ ! -d "$DATADIR/homeassistant" ]]; then
-  echo "Home Assistant config"
-  mkdir -p "$DATADIR/homeassistant"
-fi
+read -p "⚠️  This will setup the environment for this host. It will clear existing appdata if it exists. Are you sure? [y/N] " choice
+echo
+case "$choice" in
+  y|Y ) doInit;;
+  n|N ) echo "ℹ️  Init cancelled";;
+  * ) echo "invalid";;
+esac
