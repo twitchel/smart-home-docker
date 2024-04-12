@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  home-assistant:
+    container_name: home-assistant
+    image: homeassistant/home-assistant:2024.4
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+      - t2_proxy
+    volumes:
+      - $DOCKERDIR/appdata/$SHD_HOST/home-assistant/config:/config
+      - $DOCKERDIR/appdata/$SHD_HOST/home-assistant/media:/media
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    privileged: true
+    environment:
+      - TZ=$TZ
+    labels:
+      - "traefik.enable=true"
+      # HTTP Routers
+      - "traefik.http.routers.homeassistant-rtr.entrypoints=websecure"
+      - "traefik.http.routers.homeassistant-rtr.rule=Host(`hass.${DOMAINNAME}`)"
+      # Middlewares
+      #- "traefik.http.routers.helloworld-rtr.middlewares=chain-oauth@file"
+      # HTTP Services
+      - "traefik.http.routers.homeassistant-rtr.service=homeassistant-svc"
+      - "traefik.http.services.homeassistant-svc.loadbalancer.server.port=8123"
+      - "traefik.docker.network=t2_proxy"
