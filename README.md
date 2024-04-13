@@ -1,5 +1,5 @@
 # Smart Home Docker Collection
-This is a simple setup you can run on and linux based server to make your home smarter!
+This is a simple setup you can run on a linux based server to make your home smarter!
 
 ## Requirements
 - Any linux/unix based server. Images have been chosen that can run on both Intel and ARM architecture.
@@ -38,3 +38,17 @@ make start
 ```shell
 make stop
 ```
+
+## The future
+
+### Templating?
+Can make use potentially of go-style templating in bash using something like:
+
+```bash
+eval "cat <<EOF
+$(<conf/traefik.tpl)
+EOF
+" > conf/traefik.yml
+```
+
+Where Traefik.tpl uses environment variable names in place of hard-coded values
