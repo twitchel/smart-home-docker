@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  mosquitto:
+    container_name: mosquitto
+    image: "eclipse-mosquitto:1.6"
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+      - t2_proxy
+    environment:
+      - TZ=$TZ
+    volumes:
+      - "$DOCKERDIR/appdata/$SHD_HOST/mosquitto/config:/mosquitto/config"
+      - "$DOCKERDIR/appdata/$SHD_HOST/mosquitto/data:/mosquitto/data"
+      - "$DOCKERDIR/appdata/$SHD_HOST/mosquitto/log:/mosquitto/log"
+    ports:
+      - 1883:1883
