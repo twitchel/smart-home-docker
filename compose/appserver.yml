@@ -6,3 +6,4 @@ include:
   - appserver/authelia.yml
   - appserver/home-assistant.yml
   - appserver/mosquitto.yml
+  - appserver/whoami.yml
