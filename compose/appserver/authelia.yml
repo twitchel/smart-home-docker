@@ -3,7 +3,7 @@ version: "3.9"
 services:
   authelia:
     container_name: authelia
-    image: authelia/authelia:4.37.5
+    image: authelia/authelia:$AUTHELIA_VERSION
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped

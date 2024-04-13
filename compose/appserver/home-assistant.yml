@@ -3,7 +3,7 @@ version: "3.9"
 services:
   home-assistant:
     container_name: home-assistant
-    image: homeassistant/home-assistant:2024.4
+    image: homeassistant/home-assistant:$HOME_ASSISTANT_VERSION
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
