@@ -1,10 +1,15 @@
 version: "3.9"
 
 include:
+  # Main Supporting Services
   - appserver/socket-proxy.yml
   - appserver/traefik.yml
+  - appserver/ddns-updater.yml
+  # Auth
   - appserver/authelia.yml
+  # Home assistant and Supporting
   - appserver/home-assistant.yml
   - appserver/mosquitto.yml
   - appserver/zwave-js-ui.yml
+  # Debugging Tooling
   - appserver/whoami.yml
