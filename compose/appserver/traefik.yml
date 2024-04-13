@@ -101,7 +101,6 @@ services:
     environment:
       - TZ=$TZ
       - CF_DNS_API_TOKEN_FILE=/run/secrets/cf_dns_api_token
-#      - HTPASSWD_FILE=/run/secrets/basic_auth_credentials # HTTP Basic Auth Credentials
       - DOMAINNAME
     secrets:
       - cf_dns_api_token
@@ -117,11 +116,9 @@ services:
       # Healthcheck/ping
       - "traefik.http.routers.ping.rule=Host(`traefik.$DOMAINNAME`) && Path(`/ping`)"
       - "traefik.http.routers.ping.tls=true"
+      - "traefik.http.routers.ping.tls.options=tls-opts@file"
       - "traefik.http.routers.ping.service=ping@internal"
       # Middlewares
-      #- "traefik.http.routers.traefik-rtr.middlewares=chain-no-auth@file" # For No Authentication
-      #- "traefik.http.routers.traefik-rtr.middlewares=chain-basic-auth@file" # For Basic HTTP Authentication
-#      - "traefik.http.routers.traefik-rtr.middlewares=chain-oauth@file" # For Google OAuth
       - "traefik.http.routers.traefik-rtr.middlewares=chain-authelia@file" # For Authelia Authentication
     depends_on:
       socket-proxy:
