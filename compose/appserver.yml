@@ -3,4 +3,5 @@ version: "3.9"
 include:
   - appserver/socket-proxy.yml
   - appserver/traefik.yml
+  - appserver/authelia.yml
   - appserver/home-assistant.yml

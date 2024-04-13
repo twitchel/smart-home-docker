@@ -8,6 +8,9 @@ help:
 init: ## Bootstrap the smart home docker environment
 	@bash ./scripts/init.sh
 
+generate-auth-password: ## Generate password hash for use in authelia
+	@bash ./scripts/generate-auth-password.sh
+
 start: ## Run Smart Home Containers
 	@bash ./scripts/start.sh
 

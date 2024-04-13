@@ -1,0 +1,71 @@
+###############################################################
+#                   Authelia configuration                    #
+###############################################################
+
+# https://www.authelia.com/configuration/miscellaneous/introduction/#default_redirection_url
+default_redirection_url: https://authelia.{{ DOMAIN }}:4431
+
+server:
+  host: 0.0.0.0
+  port: 9091
+
+# https://www.authelia.com/configuration/miscellaneous/logging/
+log:
+  level: info
+  format: text
+  file_path: /logs/authelia.log
+  keep_stdout: true
+
+# https://www.authelia.com/configuration/second-factor/time-based-one-time-password/
+totp:
+  issuer: authelia.com
+  period: 30
+  skew: 1
+
+# https://www.authelia.com/reference/guides/passwords/
+authentication_backend:
+  file:
+    path: /config/users.yml
+    password:
+      algorithm: argon2id
+      iterations: 1
+      salt_length: 16
+      parallelism: 8
+      memory: 128 # reserved memory
+
+# https://www.authelia.com/overview/authorization/access-control/
+access_control:
+  default_policy: deny
+  rules:
+    - domain:
+        - "*.{{ DOMAIN }}"
+        - "{{ DOMAIN }}"
+      policy: two_factor
+
+# https://www.authelia.com/configuration/session/introduction/
+session:
+  name: authelia_session
+  expiration: 1h
+  inactivity: 5m
+  remember_me_duration: 1M
+  domain: {{  DOMAIN  }} # Should match whatever your root protected domain is
+
+# https://www.authelia.com/configuration/security/regulation/
+regulation:
+  max_retries: 3
+  find_time: 300
+  ban_time: 600
+
+# https://www.authelia.com/configuration/storage/introduction/
+storage:
+  # For local storage, uncomment lines below and comment out mysql. https://docs.authelia.com/configuration/storage/sqlite.html
+  # This is good for the beginning. If you have a busy site then switch to other databases.
+  local:
+    path: /config/db.sqlite3
+
+# https://www.authelia.com/configuration/notifications/introduction/
+notifier:
+  disable_startup_check: false
+  # For testing purposes, notifications can be sent in a file. Be sure to map the volume in docker-compose.
+  filesystem:
+    filename: /logs/notifications.txt
