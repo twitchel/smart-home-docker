@@ -15,6 +15,7 @@ services:
       - 8091
       - 3001
     ports:
+      - "8091:8091"
       - "3001:3001"
     devices:
       - ${ZWAVE_JS_UI_DEVICE_PATH}:/dev/zwave
