@@ -1,6 +1,6 @@
 services:
-  zwave-js-ui:
-    container_name: zwavejsui
+  appserver-zwave-js-ui:
+    container_name: appserver-zwave-js-ui
     image: zwavejs/zwave-js-ui:$ZWAVE_JS_UI_VERSION
     security_opt:
       - no-new-privileges:true
@@ -35,5 +35,5 @@ services:
       - "traefik.http.services.zwave-js-ui-svc.loadbalancer.server.port=8091"
       - "traefik.docker.network=t2_proxy"
     depends_on:
-      mosquitto:
+      appserver-mosquitto:
         condition: service_started

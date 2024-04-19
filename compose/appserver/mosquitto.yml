@@ -1,6 +1,6 @@
 services:
-  mosquitto:
-    container_name: mosquitto
+  appserver-mosquitto:
+    container_name: appserver-mosquitto
     image: eclipse-mosquitto:$MOSQUITTO_VERSION
     security_opt:
       - no-new-privileges:true

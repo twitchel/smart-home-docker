@@ -1,6 +1,6 @@
 services:
-  home-assistant:
-    container_name: home-assistant
+  appserver-home-assistant:
+    container_name: appserver-home-assistant
     image: homeassistant/home-assistant:$HOME_ASSISTANT_VERSION
     security_opt:
       - no-new-privileges:true

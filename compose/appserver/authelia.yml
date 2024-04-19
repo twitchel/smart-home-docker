@@ -1,6 +1,6 @@
 services:
-  authelia:
-    container_name: authelia
+  appserver-authelia:
+    container_name: appserver-authelia
     image: authelia/authelia:$AUTHELIA_VERSION
     security_opt:
       - no-new-privileges:true

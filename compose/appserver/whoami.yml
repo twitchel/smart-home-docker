@@ -1,8 +1,8 @@
 services:
   # WhoAmI - For Testing and Troubleshooting
-  whoami:
+  appserver-whoami:
     image: traefik/whoami
-    container_name: whoami
+    container_name: appserver-whoami
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped

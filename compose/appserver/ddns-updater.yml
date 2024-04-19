@@ -1,8 +1,8 @@
 services:
   # Dynamic DNS Updater
-  ddns-updater:
+  appserver-ddns-updater:
     image: qmcgaw/ddns-updater
-    container_name: ddns-updater
+    container_name: appserver-ddns-updater
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped

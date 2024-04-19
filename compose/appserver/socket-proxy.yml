@@ -1,7 +1,7 @@
 services:
   # Docker Socket Proxy - Security Enchanced Proxy for Docker Socket
-  socket-proxy:
-    container_name: socket-proxy
+  appserver-socket-proxy:
+    container_name: appserver-socket-proxy
     image: tecnativa/docker-socket-proxy
     security_opt:
       - no-new-privileges:true
