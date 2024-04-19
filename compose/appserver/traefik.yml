@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   # Traefik 2 - Reverse Proxy
   traefik:

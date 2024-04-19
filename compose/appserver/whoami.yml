@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   # WhoAmI - For Testing and Troubleshooting
   whoami:
