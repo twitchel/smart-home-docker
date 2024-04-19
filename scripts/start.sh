@@ -9,4 +9,4 @@ if [ -z "$SHD_HOST" ]; then
     export SHD_HOST=$hostname
 fi
 
-docker-compose --env-file .env -f docker-compose.yml up -d --build --force-recreate
+docker-compose --env-file .env -p "smart-home-docker-$SHD_HOST" -f docker-compose.yml up -d --build --force-recreate
