@@ -8,8 +8,8 @@ services:
     networks:
       - t2_proxy
     volumes:
-      - $DOCKERDIR/appdata/$SHD_HOST/home-assistant/config:/config
-      - $DOCKERDIR/appdata/$SHD_HOST/home-assistant/media:/media
+      - $SHD_DIR_APPDATA/$SHD_HOST/home-assistant/config:/config
+      - $SHD_DIR_APPDATA/$SHD_HOST/home-assistant/media:/media
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     privileged: true

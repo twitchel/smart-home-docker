@@ -8,7 +8,7 @@ services:
     networks:
       - t2_proxy
     volumes:
-      - $DOCKERDIR/appdata/$SHD_HOST/zwave-js-ui:/usr/src/app/store
+      - $SHD_DIR_APPDATA/$SHD_HOST/zwave-js-ui:/usr/src/app/store
     expose:
       - 8091
       - 3001

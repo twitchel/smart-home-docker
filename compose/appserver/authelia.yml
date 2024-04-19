@@ -9,8 +9,8 @@ services:
       - t2_proxy
       - default
     volumes:
-      - $DOCKERDIR/appdata/$SHD_HOST/authelia:/config
-      - $DOCKERDIR/logs/$SHD_HOST/authelia:/logs
+      - $SHD_DIR_APPDATA/$SHD_HOST/authelia:/config
+      - $SHD_DIR_LOGS/$SHD_HOST/authelia:/logs
     environment:
       - TZ=$TZ
       - AUTHELIA_JWT_SECRET_FILE=/run/secrets/authelia_jwt_secret

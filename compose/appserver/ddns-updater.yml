@@ -11,7 +11,7 @@ services:
     expose:
       - 8000
     volumes:
-      - $DOCKERDIR/appdata/$SHD_HOST/ddns-updater:/updater/data # Owned by UID 1000
+      - $SHD_DIR_APPDATA/$SHD_HOST/ddns-updater:/updater/data # Owned by UID 1000
     environment:
       TZ: $TZ
       PUID: $PUID
