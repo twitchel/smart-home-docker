@@ -1,0 +1,23 @@
+services:
+  appserver-glances:
+    image: nicolargo/glances:latest-full
+    container_name: appserver-glances
+    pid: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /run/user/1000/podman/podman.sock:/run/user/1000/podman/podman.sock
+    environment:
+      - "GLANCES_OPT=-w"
+    restart: unless-stopped
+    networks:
+      - t2_proxy
+    labels:
+      - "traefik.enable=true"
+      # HTTP Routers
+      - "traefik.http.routers.glances-rtr.entrypoints=websecure"
+      - "traefik.http.routers.glances-rtr.rule=Host(`glances.appserver.$DOMAINNAME`)"
+      # Middlewares
+      - "traefik.http.routers.glances-rtr.middlewares=chain-authelia@file"
+      # HTTP Services
+      - "traefik.http.routers.glances-rtr.service=glances-svc"
+      - "traefik.http.services.glances-svc.loadbalancer.server.port=61208"

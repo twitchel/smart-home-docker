@@ -3,6 +3,8 @@ include:
   - appserver/socket-proxy.yml
   - appserver/traefik.yml
   - appserver/ddns-updater.yml
+  # Reporting/Metrics
+  - appserver/glances.yml
   # Auth
   - appserver/authelia.yml
   # Home assistant and Supporting
