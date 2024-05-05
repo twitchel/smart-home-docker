@@ -1,0 +1,26 @@
+services:
+  appserver-node-red:
+    container_name: appserver-node-red
+    image: nodered/node-red:$NODE_RED_VERSION
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+      - t2_proxy
+    volumes:
+      - $SHD_DIR_APPDATA/$SHD_HOST/node-red/data:/data
+      - /etc/localtime:/etc/localtime:ro
+    privileged: true
+    environment:
+      - TZ=$TZ
+    labels:
+      - "traefik.enable=true"
+      # HTTP Routers
+      - "traefik.http.routers.node-red-rtr.entrypoints=websecure"
+      - "traefik.http.routers.node-red-rtr.rule=Host(`node-red.${DOMAINNAME}`)"
+      # Middlewares
+      - "traefik.http.routers.glances-rtr.middlewares=chain-authelia@file"
+      # HTTP Services
+      - "traefik.http.routers.node-red-rtr.service=node-red-svc"
+      - "traefik.http.services.node-red-svc.loadbalancer.server.port=1880"
+      - "traefik.docker.network=t2_proxy"

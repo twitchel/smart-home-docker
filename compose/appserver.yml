@@ -9,6 +9,7 @@ include:
   - appserver/authelia.yml
   # Home assistant and Supporting
   - appserver/home-assistant.yml
+  - appserver/node-red.yml
   - appserver/mosquitto.yml
   - appserver/zwave-js-ui.yml
   # Debugging Tooling
