@@ -14,10 +14,10 @@ services:
     command: # CLI arguments
       - --global.checkNewVersion=true
       - --global.sendAnonymousUsage=true
-      - --entrypoints.web.address=:801
-      - --entrypoints.websecure.address=:4431
-      - --entrypoints.traefik.address=:8080
-      - --entrypoints.ping.address=:8081
+      - --entrypoints.web.address=:$PORT_HTTP
+      - --entrypoints.websecure.address=:$PORT_HTTPS
+      - --entrypoints.traefik.address=:$PORT_TRAEFIK_DASHBOARD
+      - --entrypoints.ping.address=:$PORT_TRAEFIK_PING
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
       - --entrypoints.web.http.redirections.entrypoint.scheme=https
       - --entrypoints.web.http.redirections.entrypoint.permanent=true
@@ -76,16 +76,16 @@ services:
       interval: 5s
       retries: 3
     ports:
-      - target: 801
-        published: 801
+      - target: $PORT_HTTP
+        published: $PORT_HTTP
         protocol: tcp
         mode: host
-      - target: 4431
-        published: 4431
+      - target: $PORT_HTTPS
+        published: $PORT_HTTPS
         protocol: tcp
         mode: host
-      - target: 8080 # need to enable --api.insecure=true
-        published: 8080
+      - target: $PORT_TRAEFIK_DASHBOARD # need to enable --api.insecure=true
+        published: $PORT_TRAEFIK_DASHBOARD
         protocol: tcp
         mode: host
     volumes:
