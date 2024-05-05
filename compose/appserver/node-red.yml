@@ -19,7 +19,7 @@ services:
       - "traefik.http.routers.node-red-rtr.entrypoints=websecure"
       - "traefik.http.routers.node-red-rtr.rule=Host(`node-red.${DOMAINNAME}`)"
       # Middlewares
-      - "traefik.http.routers.glances-rtr.middlewares=chain-authelia@file"
+      - "traefik.http.routers.node-red-rtr.middlewares=chain-authelia@file"
       # HTTP Services
       - "traefik.http.routers.node-red-rtr.service=node-red-svc"
       - "traefik.http.services.node-red-svc.loadbalancer.server.port=1880"
